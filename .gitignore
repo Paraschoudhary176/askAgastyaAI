@@ -1,0 +1,43 @@
+# Dependency directories
+/node_modules
+/.pnp
+.pnp.js
+
+# Debugger configuration files
+.vscode/
+
+# IDE settings
+.idea/
+*.iml
+
+# macOS
+.DS_Store
+
+# Android
+/android
+android/
+*.iml
+*.lock
+/local.properties
+/.gradle
+/captures
+
+# iOS
+/ios/Pods
+/ios/build
+/ios/Podfile.lock
+/ios/*.xcworkspace
+/ios/*.pbxproj
+/ios/*.mode1v3
+/ios/*.mode2v3
+/ios/*.perspectivev3
+/ios/*.xcuserstate
+/ios/xcuserdata
+
+# Build generated
+/build/
+
+# Logs and testing
+/*.log
+/logs
+/test-results
