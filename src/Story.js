@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ScrollView,
 } from 'react-native';
 
 export default function Story() {
@@ -22,13 +23,12 @@ export default function Story() {
   const handleIconPress = icon => {
     setActiveIcon(icon);
     if (icon === 'keyboard') {
-      // Logic to show keyboard if needed (typically handled automatically)
     } else if (icon === 'star') {
-      // Logic to open Agastya
       console.log('Opening Agastya');
-      // Reset selected text and response text when opening Agastya
       setSelectedText('');
       setResponseText('');
+    } else {
+      console.log('Opening camera');
     }
   };
 
@@ -37,15 +37,12 @@ export default function Story() {
   };
 
   const handleAgastyaOption = option => {
-    // Logic to handle selected Agastya option
-    // Here you would send a request to the server with the selected text or input value and the option
-    // For demonstration purposes, I'm just setting a dummy response
     setResponseText(`Response for '${option}'`);
   };
 
   return (
     <View style={{flex: 1}}>
-      <StatusBar backgroundColor={'white'} barStyle={'dark-content'} />
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
       {/* Header */}
       <View
         style={{
@@ -77,33 +74,29 @@ export default function Story() {
       </View>
 
       {/* Text Input Holder Blocks */}
-      <View style={{paddingTop: 10}}>
+      <View style={{paddingTop: 10, elevation: 4}}>
         <TextInput
           placeholder="Title"
-          placeholderTextColor={'lightgrey'}
+          placeholderTextColor="lightgrey"
           onFocus={handleContentPress}
           style={{
             height: 50,
-            width: 'auto',
             marginHorizontal: 10,
             letterSpacing: 1,
-            backgroundColor: '#F5F5F5',
             borderRadius: 5,
             paddingLeft: 5,
           }}
         />
       </View>
-      <View style={{paddingTop: 10}}>
+      <View style={{paddingTop: 10, elevation: 4}}>
         <TextInput
           placeholder="Sub Title"
-          placeholderTextColor={'lightgrey'}
+          placeholderTextColor="lightgrey"
           onFocus={handleContentPress}
           style={{
             height: 50,
-            width: 'auto',
             marginHorizontal: 10,
             letterSpacing: 1,
-            backgroundColor: '#F5F5F5',
             borderRadius: 5,
             paddingLeft: 5,
           }}
@@ -112,7 +105,7 @@ export default function Story() {
       <View style={{paddingTop: 10}}>
         <TextInput
           placeholder="Body"
-          placeholderTextColor={'lightgrey'}
+          placeholderTextColor="lightgrey"
           numberOfLines={20}
           multiline
           onFocus={handleContentPress}
@@ -120,89 +113,227 @@ export default function Story() {
           onChangeText={text => setInputValue(text)}
           value={inputValue}
           style={{
-            height: 250,
-            width: 'auto',
+            height: 150,
             marginHorizontal: 10,
             letterSpacing: 1,
-            backgroundColor: '#F5F5F5',
             borderRadius: 5,
             textAlignVertical: 'top',
             paddingLeft: 5,
           }}
         />
-        {/* <Text>{selectedText}</Text> */}
       </View>
 
       {/* Pop-up Bar */}
       {isPopupVisible && (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            width: '100%',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-            padding: 10,
-            backgroundColor: 'white',
-            borderTopWidth: 1,
-            borderColor: '#ccc',
-          }}>
-          <TouchableOpacity
-            onPress={() => handleIconPress('star')}
-            style={{alignItems: 'center'}}>
-            <Image
-              source={require('../src/assets/star.png')} // Replace with your star icon
-              style={{
-                resizeMode: 'contain',
-                height: 24,
-                width: 24,
-                tintColor: activeIcon === 'star' ? 'blue' : 'black',
-              }}
-            />
-            <Text>Agastya</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleIconPress('keyboard')}
-            style={{alignItems: 'center'}}>
-            <Image
-              source={require('../src/assets/keyboard.png')} // Replace with your keyboard icon
-              style={{
-                resizeMode: 'contain',
-                height: 24,
-                width: 24,
-                tintColor: activeIcon === 'keyboard' ? 'blue' : 'black',
-              }}
-            />
-            <Text>Keyboard</Text>
-          </TouchableOpacity>
+        <View>
+          <View
+            style={{
+              bottom: 0,
+              width: '100%',
+              flexDirection: 'row',
+              padding: 10,
+              backgroundColor: 'white',
+              borderColor: '#ccc',
+              top: 2,
+            }}>
+            <TouchableOpacity
+              onPress={() => handleIconPress('star')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/plusbutton.png')}
+                style={{
+                  resizeMode: 'contain',
+                  height: 18,
+                  width: 18,
+                  marginHorizontal: 15,
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleIconPress('keyboard')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/keyboard.png')}
+                style={{
+                  resizeMode: 'contain',
+                  height: 18,
+                  width: 18,
+                  tintColor: activeIcon === 'keyboard' ? 'blue' : 'black',
+                  marginHorizontal: 10,
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleIconPress('star')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/star.png')}
+                style={{
+                  resizeMode: 'contain',
+                  height: 18,
+                  width: 18,
+                  tintColor: activeIcon === 'star' ? 'blue' : 'black',
+                  marginHorizontal: 15,
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleIconPress('star')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/upper-case.png')}
+                style={{
+                  resizeMode: 'contain',
+                  height: 18,
+                  width: 18,
+                  marginHorizontal: 15,
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleIconPress('star')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/microphone-black-shape.png')}
+                style={{
+                  resizeMode: 'contain',
+                  height: 18,
+                  width: 18,
+                  marginHorizontal: 15,
+                }}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => handleIconPress('star')}
+              style={{alignItems: 'center'}}>
+              <Image
+                source={require('../src/assets/camera.png')}
+                style={{resizeMode: 'contain', height: 18, width: 18, left: 22}}
+              />
+              <Text
+                style={{
+                  alignSelf: 'flex-end',
+                  top: -18,
+                  right: -80,
+                  fontSize: 14,
+                  fontWeight: 'bold',
+                  color: 'black',
+                }}>
+                Upload Cover
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
       {/* Agastya Options */}
       {activeIcon === 'star' && (
-        <View style={{marginTop: 20, paddingHorizontal: 10}}>
-          <Text>Selected Text:</Text>
-          <Text>
-            {inputValue.substring(selectedText.start, selectedText.end)}
-          </Text>
-          <Text>Agastya Options:</Text>
-          <TouchableOpacity
-            onPress={() => handleAgastyaOption('Make it shorter')}>
-            <Text>Make it shorter</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => handleAgastyaOption('Improve writing')}>
-            <Text>Improve writing</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+        <ScrollView style={{flex: 1, paddingBottom: 5}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              marginHorizontal: 25,
+            }}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: 'dark-grey',
+                top: 3,
+                fontWeight: '700',
+              }}>
+              Ask Agastya AI
+            </Text>
+            <TouchableOpacity style={{elevation: 10}}>
+              <View
+                style={{
+                  height: 35,
+                  width: 35,
+                  borderWidth: 1,
+                  borderStyle: 'solid',
+                  borderRadius: 5,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderColor: '#b2b2b2',
+                }}>
+                <Image
+                  source={require('../src/assets/right-arrow.png')}
+                  style={{
+                    resizeMode: 'contain',
+                    height: 18,
+                    width: 18,
+                    tintColor: '#7f7f7f',
+                  }}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
 
-      {/* Agastya Response Display */}
-      {responseText !== '' && (
-        <View style={{marginTop: 20, paddingHorizontal: 10}}>
-          <Text>Agastya Response:</Text>
-          <Text>{responseText}</Text>
-        </View>
+          <View style={{paddingTop: 15}}>
+            <TextInput
+              placeholder="Ask me or Choose an Option"
+              placeholderTextColor="lightgrey"
+              style={{
+                height: 50,
+                marginHorizontal: 20,
+                letterSpacing: 1,
+                borderRadius: 10,
+                paddingLeft: 15,
+                borderWidth: 0.8,
+                borderColor: '#ffe599',
+              }}
+            />
+          </View>
+          <View style={{marginTop: 30, paddingHorizontal: 20, bottom: 20}}>
+            <View>
+              <TouchableOpacity
+                onPress={() =>
+                  handleAgastyaOption('Correct Grammar & Spelling')
+                }>
+                <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                  Correct Grammar & Spelling
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{top: 5}}>
+              <TouchableOpacity
+                onPress={() => handleAgastyaOption('Improve Writing')}>
+                <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                  Improve Writing
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{top: 5}}>
+              <TouchableOpacity
+                onPress={() => handleAgastyaOption('Make it Longer')}>
+                <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                  Make it Longer
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{top: 10}}>
+              <TouchableOpacity
+                onPress={() => handleAgastyaOption('Make it Shorter')}>
+                <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                  Make it Shorter
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{top: 15}}>
+              <TouchableOpacity
+                onPress={() => handleAgastyaOption('Summarize')}>
+                <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                  Summarize
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{top: 15}}>
+              <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
+                Agastya Response: {responseText}
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
       )}
     </View>
   );
